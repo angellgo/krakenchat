@@ -13,14 +13,44 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+
+        Schema::create('genero', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('genero');
             $table->timestamps();
         });
+
+        Schema::create('status_user', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('description');
+            $table->timestamps();
+        });
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('nombre');
+            $table->string('apellidos');
+            $table->tinyInteger('verificado');
+            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('genero_id');
+            $table->rememberToken();
+            $table->timestamps();
+
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('status_user')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('genero_id')
+                ->references('id')
+                ->on('genero')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+
     }
 
     /**
@@ -31,5 +61,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('status_user');
+        Schema::dropIfExists('genero');
+        
     }
 }

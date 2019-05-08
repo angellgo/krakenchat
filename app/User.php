@@ -15,7 +15,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username',
+        'nombre',
+        'apellidos',
+        'verificado',
+        'status_id',
+        'genero_id'
+
     ];
 
     /**
@@ -26,4 +32,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function genero()
+    {
+        return $this -> belongsTo('App\Genero','genero_id');
+    }
+
+    public function status_user()
+    {
+        return $this -> belongsTo('App\StatusUser','status_id');
+    }
+
+    public function reporte()
+    {
+        return $this -> hasOne('App\Reporte');
+    }
+
+    public function chat()
+    {
+        return $this -> hasOne('App\Chat');
+        
+    }
 }
