@@ -51,7 +51,7 @@ class CreateUsersTable extends Migration
                 ->onUpdate('cascade');
         });
 
-    }
+    } 
 
     /**
      * Reverse the migrations.
