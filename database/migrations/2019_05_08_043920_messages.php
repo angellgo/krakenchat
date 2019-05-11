@@ -13,7 +13,7 @@ class Messages extends Migration
      */
     public function up()
     {
-        Schema::create('reporte', function (Blueprint $table) {
+        Schema::create('reportes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('motivo');
             $table->string('descripcion');
@@ -27,15 +27,21 @@ class Messages extends Migration
                 ->onUpdate('cascade');
         });
 
-        Schema::create('chat', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_remitente');
-            $table->string('destinatario');
+            $table->unsignedInteger('destinatario');
             $table->date('fecha');
             $table->time('hora');
             $table->timestamps();
 
             $table->foreign('id_remitente')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('destinatario')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
@@ -55,7 +61,7 @@ class Messages extends Migration
 
             $table->foreign('id_chat')
                 ->references('id')
-                ->on('chat')
+                ->on('chats')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -72,8 +78,8 @@ class Messages extends Migration
     public function down()
     {
         Schema::dropIfExists('menajes');
-        Schema::dropIfExists('chat');
-        Schema::dropIfExists('reporte');
+        Schema::dropIfExists('chats');
+        Schema::dropIfExists('reportes');
 
     }
 }

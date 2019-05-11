@@ -14,13 +14,13 @@ class CreateUsersTable extends Migration
     public function up()
     {
 
-        Schema::create('genero', function (Blueprint $table) {
+        Schema::create('generos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('genero');
             $table->timestamps();
         });
 
-        Schema::create('status_user', function (Blueprint $table) {
+        Schema::create('status_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
             $table->timestamps();
@@ -40,13 +40,13 @@ class CreateUsersTable extends Migration
 
             $table->foreign('status_id')
                 ->references('id')
-                ->on('status_user')
+                ->on('status_users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table->foreign('genero_id')
                 ->references('id')
-                ->on('genero')
+                ->on('generos')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -61,8 +61,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('status_user');
-        Schema::dropIfExists('genero');
+        Schema::dropIfExists('status_users');
+        Schema::dropIfExists('generos');
         
     }
 }
