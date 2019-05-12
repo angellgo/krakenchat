@@ -65,8 +65,6 @@ class Messages extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
-
-
     
     }
 
@@ -77,9 +75,8 @@ class Messages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menajes');
-        Schema::dropIfExists('chats');
+        Schema::dropIfExists('mensajes');
+        Schema::dropIfExists('chats');    
         Schema::dropIfExists('reportes');
-
     }
 }

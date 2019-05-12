@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas de los Usuarios
 Route::get('/usuario/registro','UserController@index')->name('user.register');
+Route::post('/usuario/nuevo','UserController@create')->name('usuario.nuevo');

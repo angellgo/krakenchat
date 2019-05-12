@@ -15,7 +15,7 @@ class Mensaje extends Model
         'id_chat'
     ];
 
-    public function chat()
+    public function chats()
     {
         return $this -> belongsTo('App\Chat','id_chat');
     }

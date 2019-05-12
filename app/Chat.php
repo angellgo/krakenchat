@@ -16,7 +16,9 @@ class Chat extends Model
     public function users()
     {
         return $this -> belongsTo('App\User','id_remitente');
+        return $this -> belongsTo('App\User','destinatario');
     }
+
 
     public function mensajes()
     {

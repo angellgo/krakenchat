@@ -33,22 +33,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function genero()
+    public function generos()
     {
         return $this -> belongsTo('App\Genero','genero_id');
     }
 
-    public function status_user()
+    public function status_users()
     {
         return $this -> belongsTo('App\StatusUser','status_id');
     }
 
-    public function reporte()
+    public function reportes()
     {
         return $this -> hasOne('App\Reporte');
     }
 
-    public function chat()
+    public function chats()
     {
         return $this -> hasOne('App\Chat');
         
