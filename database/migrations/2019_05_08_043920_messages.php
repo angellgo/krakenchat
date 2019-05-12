@@ -54,7 +54,7 @@ class Messages extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->tinyInteger('recibido');
-            $table->tinyInteger('leido');
+            $table->tinyInteger('leido') -> nullable();
             $table->unsignedInteger('id_chat');
             
             $table->timestamps();

@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('nombre');
             $table->string('apellidos');
-            $table->tinyInteger('verificado');
+            $table->tinyInteger('verificado') -> nullable();
             $table->unsignedInteger('status_id');
             $table->unsignedInteger('genero_id');
             $table->rememberToken();
