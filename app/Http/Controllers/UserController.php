@@ -20,7 +20,12 @@ class UserController extends Controller
         $genero = Genero::all();
         
         
-        return view('users.index',compact('genero'));     
+        return view('users.registro',compact('genero'));     
+    }
+
+    public function login()
+    {
+        return view('users.login');
     }
 
     /**
