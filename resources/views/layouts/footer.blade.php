@@ -2,34 +2,40 @@
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">Company Bio</h5>
-              <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+              <h5 class="white-text">Kraken Chat</h5>
+              <p class="grey-text text-lighten-4">Somos un equipo de estudiantes universitarios que trabajamos en este proyecto como si fuera nuestro trabajo de tiempo completo. Cualquier ayuda para apoyar y continuar el desarrollo de este proyecto y se agradece enormemente.</p>
     
     
             </div>
             <div class="col l3 s12">
-              <h5 class="white-text">Settings</h5>
+              <h5 class="white-text">Servicios</h5>
               <ul>
-                <li><a class="white-text" href="#!">Link 1</a></li>
-                <li><a class="white-text" href="#!">Link 2</a></li>
-                <li><a class="white-text" href="#!">Link 3</a></li>
-                <li><a class="white-text" href="#!">Link 4</a></li>
+                <li><a class="white-text" href="#!">Registarse</a></li>
+                <li><a class="white-text" href="#!">Iniciar Sesión</a></li>
+      
               </ul>
             </div>
             <div class="col l3 s12">
-              <h5 class="white-text">Connect</h5>
+              <h5 class="white-text">Proyecto</h5>
               <ul>
-                <li><a class="white-text" href="#!">Link 1</a></li>
-                <li><a class="white-text" href="#!">Link 2</a></li>
-                <li><a class="white-text" href="#!">Link 3</a></li>
-                <li><a class="white-text" href="#!">Link 4</a></li>
+                <li><a class="white-text" href="#!">Acerca de KrakenChat</a></li>
+                <li><a class="white-text" href="#!">Nosotros</a></li>
+                <li><a class="white-text" href="#!">Contacto</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
           <div class="container">
-          Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+              
+              Sitio Desarrollado por: 
+              <ul>
+                <li>González Sánchez Luis Enrique</li>
+                <li>Sánchez Lugo Luis Ángel</li>
+              </ul>
           </div>
         </div>
       </footer>
+
+      
+  

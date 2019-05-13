@@ -1,69 +1,65 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+        
+  $(document).ready(function() {
+    $('input#input_text, textarea#textarea2').characterCounter();
+  });</script>
+        <title>Login - KrakenChat</title>
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+    
+        @include('layouts.tools')
+    </head>
+    <body>
+        @include('layouts.navbar')
+        <br>
+        <div class="row">
+            <div class="col m4"></div>
+            <div class="col s12 m4 " >
+                <div class="card z-depth-3">
+                    <div class="card-content black-text center-align">
+                        <img  src="{{asset('ico/logoarch.png')}}" class="responsive-img"  style="max-width:200px" >    
+                        <br><br>
+                        <span class="card-title"><b>Ingresa usuario y contraseña </b> </span>
+                        <div class="row">
+                                <form class="col s12">
+                                        <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="usuario" type="text" class="validate">
+                                            <label for="usuario">Usuario</label>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="password" type="password" class="validate">
+                                            <label for="password">Contraseña</label>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            
+                                            <div class="input-field col s12">
+                                                    <a class="waves-effect waves-light btn-large  col s12 ">Ingresar</a>
+                                            </div>
+                                        </div>
+                                                        
+                                </form>
+                        </div>   
+            
+            
+                            
+                    </div>
+                   
                 </div>
             </div>
+            <div class="col m4"></div>
+
         </div>
-    </div>
-</div>
-@endsection
+        
+        @include('layouts.footer')      
+ 
+    </body>
+</html>

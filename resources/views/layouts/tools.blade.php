@@ -1,12 +1,22 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/materialize.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
    
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+  
     <!--  Scripts-->
+    <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/materialize.js') }}"></script>
-    <script src="{{ asset('js/init.js') }}"></script>
+    <script src="{{ asset('js/init.js') }}"></script>    
+    <script>
+            $(document).ready(function($){
+                $("#hamburguesita").click(function(){
+                    var ventana_ancho = $(window).width();
+                    //var ventana_alto = $(window).height();
+                        if (ventana_ancho < 1024) 
+                            $("#barra-navegacion").removeClass("navbar-fixed");
+                    });  
+                });    
+           
+    </script>
