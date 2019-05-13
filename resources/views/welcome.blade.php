@@ -7,7 +7,7 @@
 
         <title>Inicio - KrakenChat</title>
 
-    
+        <link rel="icon" type="img/png" href="{{asset('images/icono.png')}}">
         @include('layouts.tools')
     </head>
     <body>
