@@ -28,20 +28,20 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username">
+						<input type="text" id="username" class="form-control" placeholder="username">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password">
+						<input type="password"id="password" class="form-control" placeholder="password">
 					</div>
 					<div class="row align-items-center remember">
 						{{-- <input type="checkbox">Remember Me  --}}
 					</div>
 					<div class="form-group">
-						<input type="button" value="Login" class="btn float-right login_btn">
+						<input type="button" value="Login" class="btn float-right login_btn" onclick="iniciar()">
 					</div>
 				</form>
 			</div>
@@ -59,3 +59,34 @@
 @include('layouts.footer')
 </body>
 </html>
+<script>
+	function iniciar(){
+		let route = "{{route('user.newsession')}}";
+		let username = $("#username").val();
+		let password = $("#password").val();
+
+		$.ajax({
+			url:route,
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type:'POST',
+			datatype:'JSON',
+			async:false,
+			data:{username,password:username,password},
+			success:function(data){
+				if(data.msg == "success"){
+					Swal.fire("Exito","El usario y contraseña son correctas","success")
+				}else{
+					Swal.fire("Ups","EL usuario o contraseña son incorrectos","error");
+					
+					
+				}
+				
+			},
+			error:function(data){
+			}
+		});
+	}
+
+</script>

@@ -16,7 +16,7 @@ class Messages extends Migration
         Schema::create('reportes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('motivo');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->unsignedInteger('no_usuario');
             $table->timestamps();
 
@@ -53,13 +53,13 @@ class Messages extends Migration
             $table->longText('texto');
             $table->date('fecha');
             $table->time('hora');
-            $table->tinyInteger('recibido');
+            $table->tinyInteger('recibido') -> nullable();
             $table->tinyInteger('leido') -> nullable();
-            $table->unsignedInteger('id_chat');
+            $table->unsignedInteger('chat_id');
             
             $table->timestamps();
 
-            $table->foreign('id_chat')
+            $table->foreign('chat_id')
                 ->references('id')
                 ->on('chats')
                 ->onDelete('cascade')
