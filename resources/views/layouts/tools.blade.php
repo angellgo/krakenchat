@@ -5,6 +5,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
    
 
+
     <!--  Scripts-->
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/materialize.js') }}"></script>
