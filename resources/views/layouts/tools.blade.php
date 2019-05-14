@@ -3,8 +3,8 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('css/materialize.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-   
-
+    
+    <link rel="icon" href="{{ asset('ico/icono.png') }}">
 
     <!--  Scripts-->
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
