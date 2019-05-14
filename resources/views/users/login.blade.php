@@ -27,7 +27,7 @@
                                 <form class="col s12">
                                         <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="usuario" type="text" class="validate">
+                                            <input id="username" type="text" class="validate">
                                             <label for="usuario">Usuario</label>
                                         </div>
                                         </div>
@@ -61,3 +61,34 @@
  
     </body>
 </html>
+<script>
+	function iniciar(){
+		let route = "{{route('user.newsession')}}";
+		let username = $("#username").val();
+		let password = $("#password").val();
+
+		$.ajax({
+			url:route,
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type:'POST',
+			datatype:'JSON',
+			async:false,
+			data:{username,password:username,password},
+			success:function(data){
+				if(data.msg == "success"){
+					Swal.fire("Exito","El usario y contraseña son correctas","success")
+				}else{
+					Swal.fire("Ups","EL usuario o contraseña son incorrectos","error");
+					
+					
+				}
+				
+			},
+			error:function(data){
+			}
+		});
+	}
+
+</script>

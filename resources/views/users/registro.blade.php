@@ -13,8 +13,8 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Registrar Usuario</h3> {{--
-                        <div class="d-flex justify-content-end social_icon">
+                        <h3>Registrar Usuario</h3> 
+                    {{-- <div class="d-flex justify-content-end social_icon">
                             <span><i class="fab fa-facebook-square"></i></span>
                             <span><i class="fab fa-google-plus-square"></i></span>
                             <span><i class="fab fa-twitter-square"></i></span>
@@ -80,7 +80,7 @@
                                 <input type="checkbox">Remember Me --}}
                             </div>
                             <div class="form-group">
-                                <input type="button" value="Registrar" class="btn float-right login_btn" onclick="registrar()">
+                                <input type="button" value="Registrar" class="btn float-right login_btn" onclick="registraruser()">
                             </div>
                         </form>
                     </div>
@@ -102,7 +102,8 @@
 </html>
 
 <script>
-    function registrar(){
+    function registraruser(){
+        let route = "{{route('usuario.create')}}";
         let nombre = $("#nombre").val();
         let apellido = $("#apellido").val();
         let username = $("#username").val();
@@ -110,9 +111,12 @@
         let pass_confirm = $("#pass_confirm").val();
         let status = 1;
         let genero = $("#genero").val();
-        
+        console.log(genero);
         if (password == pass_confirm){
-            $.ajax({
+            if(nombre == "" || apellido == "" || genero == 0){
+                Swal.fire("Error","Verifique que no haya campos vacios","error");
+            }else{
+                $.ajax({
                 url:route,
                 headers:{
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -122,12 +126,24 @@
                 async:false,
                 data:{nombre,apellido,username,password,status,genero:nombre,apellido,username,password,genero},
                 success:function(data){
+                    if(data.msg == "success"){
+                        Swal.fire('Bien',"El usuario se registro de manera correcta","success");
+                        setTimeout(function(){  window.location.href = "{{route('user.login')}}";},3000);
+                      
+                    }else if (data.msg == "error-user"){
+                        Swal.fire('Alerta',"Ese nombre de usuario ya existe","error");
+                    }else{
+                        Swal.fire('Ups',"Algo Salio mal","error"); 
+                    }
                 },
                 error:function(data){
+                    Swal.fire('Ups',"Algo Salio mal","error");
                 }
             });
+            }
+            
         }else{
-            alert("Las contraseñas no coinciden");
+            Swal.fire("Alerta","Las contraseñas no coinciden","error");
         }
     }
 </script>

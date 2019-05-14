@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Genero;
 use App\User;
 use TheSeer\Tokenizer\Exception;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;   
 
 class UserController extends Controller
 {
@@ -23,9 +26,16 @@ class UserController extends Controller
         return view('users.registro',compact('genero'));     
     }
 
-    public function login()
+    public function loginview()
     {
         return view('users.login');
+    }
+
+    public function iniciosesion(Request $request)
+    {
+        $usuario = User::where("username","=",$request -> username)->get()->first();
+
+        return "error";
     }
 
     /**
@@ -34,10 +44,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
-        BD::beginTransaction();
+    {   
+        $comprobar = User::where("username","=",$request-> username)->get()->first();
+
+        if(is_object($comprobar)){
+            $comprobar -> msg = "error-user";
+            return $comprobar;
+        }
+        DB::beginTransaction();
         try{
             $usuario = new User();
+            $usuario -> nombre = $request -> nombre;
+            $usuario -> apellidos = $request -> apellido;
+            $usuario -> username = $request -> username;
+            $usuario -> password = bcrypt($request -> password);
+            $usuario -> status_id = $request -> status;
+            $usuario -> genero_id = $request -> genero;
+
+            $usuario -> save();
+            $usuario -> msg = "success";
 
         }catch(Exception $e){
             DB::rollback();

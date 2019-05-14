@@ -43,8 +43,7 @@
             
                         <p class="light center-align">Intercambia información al instante sin importar las distancias o diferencias de horario desde cualquier lugar del mundo siempre y cuando estes conectado a internet.</p>
                       </div>
-                    </div>
-            
+                    </div>            
                     <div class="col s12 m4">
                       <div class="icon-block">
                         <h2 class="center teal-text"><i class="material-icons">group</i></h2>
