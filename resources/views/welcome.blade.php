@@ -12,7 +12,7 @@
     </head>
     <body>
         @include('layouts.navbar')
-
+      
             <div id="index-banner" class="parallax-container">
                 <div class="section no-pad-bot">
                   <div class="container">
