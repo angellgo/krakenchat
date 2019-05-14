@@ -89,39 +89,7 @@
                     </div>   
         
         
-<<<<<<< HEAD
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-question"></i></span>
-                                </div>
-                                <select id="genero" class="form-control">
-                                    <option value="0"> Seleccione un genero </option>
-                                    @foreach ($genero as $item)
-                                        <option value="{{$item -> id}}"> {{$item -> genero}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="row align-items-center remember">
-                                {{--
-                                <input type="checkbox">Remember Me --}}
-                            </div>
-                            <div class="form-group">
-                                <input type="button" value="Registrar" class="btn float-right login_btn" onclick="registraruser()">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        {{--
-                        <div class="d-flex justify-content-center links">
-                            Don't have an account?<a href="#">Sign Up</a>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
-                        </div> --}}
-                    </div>
-=======
                         
->>>>>>> Develop
                 </div>
                
             </div>
