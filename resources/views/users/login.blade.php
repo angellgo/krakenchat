@@ -4,17 +4,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script>
-        
-  $(document).ready(function() {
-    $('input#input_text, textarea#textarea2').characterCounter();
-  });</script>
         <title>Login - KrakenChat</title>
+        <script>      
+            $(document).ready(function() {
+                $('input#input_text, textarea#textarea2').characterCounter();
+            });   
+        </script>
+        
         @include('layouts.tools')
     </head>
     <body>
         @include('layouts.navbar')
-        <br>
+        <br><br>
         <div class="row">
             <div class="col m4"></div>
             <div class="col s12 m4 " >
@@ -45,19 +46,16 @@
                                         </div>
                                                         
                                 </form>
-                        </div>   
-            
-            
-                            
+                        </div>    
                     </div>
                    
                 </div>
             </div>
             <div class="col m4"></div>
-
+            
         </div>
-        
-        @include('layouts.footer')      
+        <br><br><br><br><br><br>
+            @include('layouts.footer')      
  
     </body>
 </html>

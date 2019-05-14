@@ -10,8 +10,8 @@
             <div class="col l3 s12">
               <h5 class="white-text">Servicios</h5>
               <ul>
-                <li><a class="white-text" href="#!">Registarse</a></li>
-                <li><a class="white-text" href="#!">Iniciar Sesión</a></li>
+                <li><a class="white-text" href="{{route('user.registrer')}}">Registarse</a></li>
+                <li><a class="white-text" href="{{route('user.login')}}">Iniciar Sesión</a></li>
       
               </ul>
             </div>
