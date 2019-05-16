@@ -35,7 +35,15 @@ class UserController extends Controller
     {
         $usuario = User::where("username","=",$request -> username)->get()->first();
 
-        return "error";
+        DB::beginTransaction();
+        try{
+
+        }catch(Exception $e){
+            DB::rollback();
+            return $e;
+        }
+        DB::commit();
+        return $usuario;
     }
 
     /**

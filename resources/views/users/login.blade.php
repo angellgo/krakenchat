@@ -5,13 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login - KrakenChat</title>
+        @include('layouts.tools')
         <script>      
             $(document).ready(function() {
                 $('input#input_text, textarea#textarea2').characterCounter();
             });   
         </script>
         
-        @include('layouts.tools')
+        
     </head>
     <body>
         @include('layouts.navbar')
@@ -41,7 +42,8 @@
                                         <div class="row">
                                             
                                             <div class="input-field col s12">
-                                                    <a class="waves-effect waves-light btn-large  col s12 ">Ingresar</a>
+                                                    {{-- <a class="waves-effect waves-light btn-large  col s12 ">Ingresar</a> --}}
+                                                    <button type="button"  onclick="iniciar()">Iniciar Sesion</button>
                                             </div>
                                         </div>
                                                         
