@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('chat', function () {
+    return view('users.chat2');
+});
 
 Auth::routes();
 
