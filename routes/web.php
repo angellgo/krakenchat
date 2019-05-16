@@ -27,3 +27,4 @@ Route::get('/usuario/login','UserController@loginview')->name('user.login');
 Route::get('/usuario/registrar','UserController@index')->name('user.registrer');
 Route::post('/usuario/crear','UserController@create')->name('usuario.create');
 Route::post('/usuario/iniciar_sesion','UserController@iniciosesion')->name('user.newsession');
+Route::get('/chat','ChatController@index')->name('chat.index');
