@@ -20,8 +20,9 @@
         <div class="row">
             <div class="col m4"></div>
             <div class="col s12 m4 " >
-                <div class="card z-depth-3">
-                    <div class="card-content black-text center-align">
+            <div class="col m1"></div>    
+                <div class="card z-depth-3 col m10">
+                    <div class="card-content black-text center-align ">
                         <img  src="{{asset('ico/logoarch.png')}}" class="responsive-img"  style="max-width:200px" >    
                         <br><br>
                         <span class="card-title"><b>Ingresa usuario y contraseña </b> </span>
@@ -50,8 +51,8 @@
                                 </form>
                         </div>    
                     </div>
-                   
                 </div>
+            <div class="col m1"></div>    
             </div>
             <div class="col m4"></div>
             
