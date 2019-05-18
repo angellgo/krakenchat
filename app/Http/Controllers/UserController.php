@@ -9,7 +9,9 @@ use App\User;
 use TheSeer\Tokenizer\Exception;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Crypt;   
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,9 +23,9 @@ class UserController extends Controller
     public function index()
     {
         $genero = Genero::all();
-        
-        
-        return view('users.registro',compact('genero'));     
+
+
+        return view('users.registro',compact('genero'));
     }
 
     public function loginview()
@@ -31,11 +33,37 @@ class UserController extends Controller
         return view('users.login');
     }
 
-    public function iniciosesion(Request $request)
+    
+
+    public function login(Request $request)
     {
+        $data = $request -> all();
+        // dd($data);
         $usuario = User::where("username","=",$request -> username)->get()->first();
 
-        return "error";
+        if(is_object($usuario)){
+            if(Auth::attempt(['username' => $request -> username, 'password' => $request -> password])){
+                return redirect()->route('chat.index');
+            }
+            return back()->withErrors(["password"=>"La contraseña es incorrecta"]);
+        }else{
+            return back()->withErrors(['username' => 'El usuario no esta registrado o es incorrecto']);
+        }
+        
+
+ 
+
+        // if(is_object($usuario)){
+        //     if(Hash::check($request->password, $usuario -> password)){
+
+        //         return view('chats.chat2',compact('usuario'));
+
+        //     }else{
+        //         return back()->withErrors(['password' => 'La contraseña no coincide']);
+        //     }
+        // }else{
+        //     return back()->withErrors(['username' => 'El usuario no esta registrado']);
+        // }
     }
 
     /**
@@ -44,20 +72,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {   
-        $comprobar = User::where("username","=",$request-> username)->get()->first();
-
-        if(is_object($comprobar)){
-            $comprobar -> msg = "error-user";
-            return $comprobar;
-        }
+    {
         DB::beginTransaction();
         try{
             $usuario = new User();
             $usuario -> nombre = $request -> nombre;
             $usuario -> apellidos = $request -> apellido;
             $usuario -> username = $request -> username;
-            $usuario -> password = bcrypt($request -> password);
+            $usuario -> password = Hash::make($request -> password);
             $usuario -> status_id = $request -> status;
             $usuario -> genero_id = $request -> genero;
 
@@ -73,12 +95,12 @@ class UserController extends Controller
     }
 
 
-   
+
     public function show(Request $request)
     {
-        
-        
-        
+
+
+
     }
 
     /**
@@ -128,5 +150,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function logout(){
+    
+        Auth::logout();
+
+        return redirect('/');
     }
 }

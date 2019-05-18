@@ -39,8 +39,8 @@
                                             </div>
 
                                             <div class="input-field col s8">
-                                                    <input id="Apellido" type="text" class="validate">
-                                                    <label for="Apellido">Apellido</label>
+                                                    <input id="apellido" type="text" class="validate">
+                                                    <label for="apellido">Apellido</label>
                                             </div>
 
                                             <div class="input-field col s12">
@@ -58,7 +58,7 @@
                                             </div>
 
                                             <div class="input-field col s12 m12">
-                                                    <select>
+                                                    <select id="genero">
                                                       <option value="" disabled selected>Selecciona una opción</option>
                                                       @foreach ($genero as $item)
                                                       <option value="{{$item -> id}}"> {{$item -> genero}}</option>
@@ -74,7 +74,7 @@
                                             <div class="row">
                                                 <div class="col m8"></div>
                                                 <div class="input-field col s12 m4">
-                                                        <a class="waves-effect waves-light btn-large  col s12 " onclick="registrar()">Registar</a>
+                                                        <a class="waves-effect waves-light btn-large  col s12 " onclick="registraruser()">Registar</a>
                                                 </div>
                                             </div>
                                                             
@@ -129,7 +129,7 @@
                 success:function(data){
                     if(data.msg == "success"){
                         Swal.fire('Bien',"El usuario se registro de manera correcta","success");
-                        setTimeout(function(){  window.location.href = "{{route('user.login')}}";},3000);
+                        setTimeout(function(){  window.location.href = "{{route('user.loginview')}}";},3000);
                       
                     }else if (data.msg == "error-user"){
                         Swal.fire('Alerta',"Ese nombre de usuario ya existe","error");

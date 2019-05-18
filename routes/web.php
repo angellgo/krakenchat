@@ -14,16 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('chat', function () {
-    return view('users.chat2');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas de los Usuarios
-Route::get('/usuario/login','UserController@loginview')->name('user.login');
-Route::get('/usuario/registrar','UserController@index')->name('user.registrer');
+Route::get('/usuario/login','UserController@loginview')->name('user.loginview') -> middleware('guest');
+Route::get('/usuario/registrar','UserController@index')->name('user.registrer') -> middleware('guest');
 Route::post('/usuario/crear','UserController@create')->name('usuario.create');
-Route::post('/usuario/iniciar_sesion','UserController@iniciosesion')->name('user.newsession');
+Route::post('/login','UserController@login')->name('user.login');
+Route::get('/chat', 'ChatController@index')->name('chat.index');
+
+//Cerrar Sesion
+Route::post('/logout','UserController@logout')->name('logout');
