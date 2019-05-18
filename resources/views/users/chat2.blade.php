@@ -9,7 +9,8 @@
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
     <script>      
             $(document).ready(function() { 
-                $(".dropdown-trigger").dropdown();       
+                $(".dropdown-trigger").dropdown();   
+                $(".chat").animate({ scrollTop: $('.chat').prop("scrollHeight")}, 1000);    
                 //autocomplete
                 $('input.autocomplete').autocomplete({
                 data: {
@@ -18,7 +19,7 @@
                     "Google": 'https://placehold.it/250x250'
                 },
                 });
-                $(".chat").animate({ scrollTop: $('.chat').prop("scrollHeight")}, 1000);
+               
             });   
        
             
@@ -272,7 +273,7 @@
                         <div class="row">
                                 <div class="input-field col s11">
                                 <textarea id="mensaje" class="materialize-textarea"></textarea>
-                                <label for="mensaje">Escribe un mensaje aquí</label>  
+                                <label for="mensaje">Escribe tu mensaje aquí</label>  
                                 </div>
                                 <a href="#" id="BotonEnviar">
                                                 <i class="material-icons col s1" style="font-size: 30px; margin-top:20px;color:#4db6ac">near_me</i>    
