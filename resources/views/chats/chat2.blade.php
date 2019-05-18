@@ -30,10 +30,17 @@
     <!--Navbar-->
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content ">
+        <li>{{Auth()->user()->username}}</li>
         <li><a href="#!">Perfil</a></li>
         <li><a href="#!">Configuración</a></li>
         <li class="divider"></li>
-        <li><a href="{{route('user.loginview')}}">Cerrar Sesión</a></li>
+       
+        <li><a href="{{route('logout')}} " onclick="event.preventDefault();
+        document.getElementById('logout-form').submit()">Cerrar Sesión</a></li>
+
+        <form action="{{route('logout')}}" method="post" id="logout-form">
+                {{ csrf_field() }}
+        </form>
     </ul>
     <nav style="background-color: white">
         <div class="nav-wrapper">

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -32,6 +33,8 @@ class UserController extends Controller
         return view('users.login');
     }
 
+    
+
     public function login(Request $request)
     {
         $data = $request -> all();
@@ -39,16 +42,28 @@ class UserController extends Controller
         $usuario = User::where("username","=",$request -> username)->get()->first();
 
         if(is_object($usuario)){
-            if(Hash::check($request->password, $usuario -> password)){
-
-                return view('chats.chat2');
-
-            }else{
-                return back()->withErrors(['password' => 'La contraseña no coincide']);
+            if(Auth::attempt(['username' => $request -> username, 'password' => $request -> password])){
+                return redirect()->route('chat.index');
             }
+            return back()->withErrors(["password"=>"La contraseña es incorrecta"]);
         }else{
-            return back()->withErrors(['username' => 'El usuario no esta registrado']);
+            return back()->withErrors(['username' => 'El usuario no esta registrado o es incorrecto']);
         }
+        
+
+ 
+
+        // if(is_object($usuario)){
+        //     if(Hash::check($request->password, $usuario -> password)){
+
+        //         return view('chats.chat2',compact('usuario'));
+
+        //     }else{
+        //         return back()->withErrors(['password' => 'La contraseña no coincide']);
+        //     }
+        // }else{
+        //     return back()->withErrors(['username' => 'El usuario no esta registrado']);
+        // }
     }
 
     /**
@@ -135,5 +150,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function logout(){
+    
+        Auth::logout();
+
+        return redirect('/');
     }
 }
