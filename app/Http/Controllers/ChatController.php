@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Chat;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
@@ -18,7 +20,34 @@ class ChatController extends Controller
     
     public function index()
     {
-        return view('chats.chat2');
+        $idUsuario=Auth()-> user()-> id;
+        $contactos = Chat::where('id_remitente','=',$idUsuario)->orwhere('destinatario','=',$idUsuario)
+        ->orderBy('id','DESC')->get();
+        $contactos -> mostrar = "";
+        $data = [];
+        foreach($contactos as $contacto){
+          
+            if($contacto -> destinatario == $idUsuario){
+                $data [] =[
+                    'destinatario'=>$contacto ->destinatario,
+                    'remitente' => $contacto -> id_remitente,
+                    'mostrar' => $contacto -> id_remitente
+                ];
+             
+            }else{
+                $data [] =[
+                    'destinatario'=>$contacto ->destinatario,
+                    'remitente' => $contacto -> id_remitente,
+                    'mostrar' => $contacto ->destinatario
+                ];
+            }
+        }
+        
+        
+        return view('chats.chat2',compact('data'));
+       
+        
+       
     }
 
     /**

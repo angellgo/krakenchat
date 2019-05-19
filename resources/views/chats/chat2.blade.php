@@ -30,7 +30,10 @@
     <!--Navbar-->
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content ">
-        <li>{{Auth()->user()->username}}</li>
+        <li><a href="#">
+             {{Auth()->user()->username}}
+            </a>
+        </li>
         <li><a href="#!">Perfil</a></li>
         <li><a href="#!">Configuración</a></li>
         <li class="divider"></li>
@@ -71,78 +74,20 @@
                             </div>
                         </div>
                         <ul class="collection scroll">
+
+ 
+                            
+                            @foreach ($data as $item)
                             <li class="collection-item avatar" style="border-bottom: none">
                                 <a href="#" style="color:#424242">
                                     <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
+                                    <span class="title" style="font-weight: bolder">{{$item -> mostrar }}</span>
                                     <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
                                     </p>
                                 </a>
                             </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="collection-item avatar" style="border-bottom: none">
-                                <a href="#" style="color:#424242">
-                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">Title</span>
-                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
-                                    </p>
-                                </a>
-                            </li>
+                            @endforeach
+                            
                         </ul>
                     </div>
                     <!--fin de primer columna-->
