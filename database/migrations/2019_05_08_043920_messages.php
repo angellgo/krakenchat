@@ -30,7 +30,7 @@ class Messages extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_remitente');
-            $table->unsignedInteger('destinatario');
+            $table->string('destinatario');
             $table->date('fecha');
             $table->time('hora');
             $table->timestamps();
@@ -41,11 +41,11 @@ class Messages extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('destinatario')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            // $table->foreign('destinatario')
+            //     ->references('id')
+            //     ->on('users')
+            //     ->onDelete('cascade')
+            //     ->onUpdate('cascade');
         });
 
         Schema::create('mensajes', function (Blueprint $table) {

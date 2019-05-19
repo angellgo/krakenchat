@@ -7,6 +7,8 @@ use App\Chat;
 use Illuminate\Support\Facades\Auth;
 use TheSeer\Tokenizer\Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Illuminate\Foundation\Auth\User;
 
 class ChatController extends Controller
 {
@@ -22,34 +24,10 @@ class ChatController extends Controller
     
     public function index()
     {
-        $idUsuario=Auth()-> user()-> id;
-        $contactos = Chat::where('id_remitente','=',$idUsuario)->orwhere('destinatario','=',$idUsuario)
-        ->orderBy('id','DESC')->get();
-        $contactos -> mostrar = "";
-        $data = [];
-        foreach($contactos as $contacto){
-          
-            if($contacto -> destinatario == $idUsuario){
-                $data [] =[
-                    'destinatario'=>$contacto ->destinatario,
-                    'remitente' => $contacto -> id_remitente,
-                    'mostrar' => $contacto -> id_remitente
-                ];
-             
-            }else{
-                $data [] =[
-                    'destinatario'=>$contacto ->destinatario,
-                    'remitente' => $contacto -> id_remitente,
-                    'mostrar' => $contacto ->destinatario
-                ];
-            }
-        }
-        
-        
-        return view('chats.chat2',compact('data'));
-       
-        
-       
+        $idUsuario=Auth()-> user();
+        $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
+        ->orderBy('id','DESC')->get();   
+        return view('chats.chat2',compact('contactos'));
     }
 
     /**
@@ -59,7 +37,37 @@ class ChatController extends Controller
      */
     public function create(Request $request)
     {
-       
+        $hora = date('G').":". date('i');
+        $usuario = Auth() -> user();
+        $contacto = User::where("username","=",$request -> contacto)->get()->first();
+    
+       if(is_object($contacto)){
+        if($request -> contacto == $usuario -> username){
+            $contacto -> msg = "eselmismo";
+            return $contacto;
+        }
+           
+           DB::beginTransaction();
+           try{
+             $nuevochat = new Chat();
+             $nuevochat -> id_remitente = $usuario -> id;
+             $nuevochat -> destinatario = $request -> contacto;
+             $nuevochat -> fecha = date('Y-m-d');
+             $nuevochat -> hora = $hora;
+             $nuevochat -> save();
+
+           }catch(Exception $e){
+               DB::rollback();
+                return $e;
+           }
+           DB::commit();
+           return $nuevochat;
+
+
+       }else{
+           $msg = "noexiste";
+           return $msg;
+       }
        
     }
 

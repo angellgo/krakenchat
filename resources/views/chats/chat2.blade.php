@@ -22,7 +22,10 @@
             $(".chat").animate({
                 scrollTop: $('.chat').prop("scrollHeight")
             }, 1000);
+
+            $('#modal1').modal();
         });
+   
     </script>
 </head>
 
@@ -75,18 +78,36 @@
                         </div>
                         <ul class="collection scroll">
 
- 
-                            
-                            @foreach ($data as $item)
+                            @if (sizeof($contactos) == 0)
+                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1"> Nuevo Chat</a>
+                            @else
+                            @foreach ($contactos as $item)
+                            @if ($item -> id_remitente == Auth() -> user() -> id)
                             <li class="collection-item avatar" style="border-bottom: none">
                                 <a href="#" style="color:#424242">
                                     <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
-                                    <span class="title" style="font-weight: bolder">{{$item -> mostrar }}</span>
+                                    <span class="title" style="font-weight: bolder">{{$item -> destinatario}}</span>
+                                    <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
+                                    </p>
+                                </a>
+                            </li> 
+                            @else
+                            <li class="collection-item avatar" style="border-bottom: none">
+                                <a href="#" style="color:#424242">
+                                    <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
+                                    <span class="title" style="font-weight: bolder">{{$item -> users -> username}}</span>
                                     <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
                                     </p>
                                 </a>
                             </li>
+                            @endif
+                           
                             @endforeach
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1"> Nuevo Chat</a>
+
+                            @endif
+                            
+                           
                             
                         </ul>
                     </div>
@@ -232,7 +253,7 @@
                                     <textarea id="mensaje" class="materialize-textarea"></textarea>
                                     <label for="mensaje">Escribe un mensaje aquí</label>
                                 </div>
-                                <a href="#" id="BotonEnviar" onclick="enviarmensaje()">
+                                <a href="#" id="BotonEnviar">
                                     <i class="material-icons col s1" style="font-size: 30px; margin-top:20px;color:#4db6ac">near_me</i>
                                 </a>
 
@@ -244,12 +265,25 @@
         </div>
 
     </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Escriba el nombre del contacto:</h4>
+          <input type="text" id="contacto" class="validate">
+        </div>
+        <div class="modal-footer">
+          <button class="waves-effect waves-light btn modal-trigger" onclick="agregarcontacto()">  Agregar </button>
+        </div>
+      </div>
+              
 </body>
 
 </html>
 <script>
-    function enviarmensaje(){
-        let mensaje = $("#mensaje").val();
+   
+    function agregarcontacto(){
+       
+        let contacto = $("#contacto").val();
+        console.log(contacto);
         let route = "{{route('chat.new')}}";
         $.ajax({
             url:route,
@@ -259,12 +293,18 @@
             type:'GET',
             datatype:'JSON',
             async:false,
-            data:{mensaje:mensaje},
+            data:{contacto:contacto},
             success:function(data){
-            
+                if(data == "noexiste"){
+                    Swal.fire("Error","El usuario no existe","error");
+                    $("#contacto").val("");
+                }else if(data.msg = "eselmismo"){
+                    Swal.fire("Estas pendejo","No pudes mandarte mensajes a ti mismo","info");
+                }
             },
             error:function(data){
             }
         });
     }
 </script>
+          
