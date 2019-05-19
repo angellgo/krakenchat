@@ -295,11 +295,24 @@
             async:false,
             data:{contacto:contacto},
             success:function(data){
+                console.log(data);
                 if(data == "noexiste"){
                     Swal.fire("Error","El usuario no existe","error");
                     $("#contacto").val("");
-                }else if(data.msg = "eselmismo"){
+                    $('#modal1').hide()
+                }else if (data == "object"){
+                    Swal.fire("Alerta","Ya estas hablando con ese usuario","info");
+                    $("#contacto").val("");
+                    $('#modal1').hide()
+                }
+                else if(data.msg == "eselmismo"){
                     Swal.fire("Estas pendejo","No pudes mandarte mensajes a ti mismo","info");
+                    $("#contacto").val("");
+                    $('#modal1').hide()
+                }
+                else if (data.msg == "success"){
+                    Swal.fire("Bien","Se agegro correctamente","success");
+                    window.location.reload();
                 }
             },
             error:function(data){

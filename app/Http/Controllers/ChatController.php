@@ -21,12 +21,12 @@ class ChatController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $idUsuario=Auth()-> user();
         $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
-        ->orderBy('id','DESC')->get();   
+        ->orderBy('id','DESC')->get();
         return view('chats.chat2',compact('contactos'));
     }
 
@@ -40,14 +40,21 @@ class ChatController extends Controller
         $hora = date('G').":". date('i');
         $usuario = Auth() -> user();
         $contacto = User::where("username","=",$request -> contacto)->get()->first();
-    
+        
        if(is_object($contacto)){
         if($request -> contacto == $usuario -> username){
             $contacto -> msg = "eselmismo";
             return $contacto;
-        }
-           
-           DB::beginTransaction();
+        }else{
+            $comprobar = Chat::where("id_remitente","=",$usuario -> id)->where("destinatario","=",$request->contacto)
+            ->get()->first();
+            $comprobar2 = Chat::where("id_remitente","=",$contacto -> id)->where("destinatario","=",$usuario -> username)
+            ->get()->first();
+            if(is_object($comprobar) || is_object($comprobar2)){
+                return "object";
+            }
+
+            DB::beginTransaction();
            try{
              $nuevochat = new Chat();
              $nuevochat -> id_remitente = $usuario -> id;
@@ -61,14 +68,15 @@ class ChatController extends Controller
                 return $e;
            }
            DB::commit();
+           $nuevochat -> msg = "success";
            return $nuevochat;
 
-
+        }
        }else{
            $msg = "noexiste";
            return $msg;
        }
-       
+
     }
 
     /**
