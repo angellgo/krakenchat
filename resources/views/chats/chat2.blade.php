@@ -287,7 +287,7 @@
                                     <textarea id="mensaje" class="materialize-textarea"></textarea>
                                     <label for="mensaje">Escribe un mensaje aquí</label>
                                 </div>
-                                <a href="#" id="BotonEnviar">
+                                <a href="#" id="BotonEnviar" onclick="enviarmensaje()">
                                     <i class="material-icons col s1" style="font-size: 30px; margin-top:20px;color:#4db6ac">near_me</i>
                                 </a>
 
@@ -302,3 +302,24 @@
 </body>
 
 </html>
+<script>
+    function enviarmensaje(){
+        let mensaje = $("#mensaje").val();
+        let route = "{{route('chat.new')}}";
+        $.ajax({
+            url:route,
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'GET',
+            datatype:'JSON',
+            async:false,
+            data:{mensaje:mensaje},
+            success:function(data){
+            
+            },
+            error:function(data){
+            }
+        });
+    }
+</script>

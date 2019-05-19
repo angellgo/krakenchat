@@ -16,13 +16,17 @@
             <div id="index-banner" class="parallax-container">
                 <div class="section no-pad-bot">
                   <div class="container">
+                    
+                   
                     <br><br>
+                
                     <h1 class="header center teal-text text-lighten-2">KrakenChat</h1>
                     <div class="row center">
                       <h5 class="header col s12 light">KrakenChat es una aplicación web de mensajería instantánea con métodos de cifrado.</h5>
+                      
                     </div>
                     <div class="row center">
-                      <a href="" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Entrar</a>
+                      <a href="{{route('user.loginview')}}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Entrar</a>
                     </div>
                     <br><br>
             

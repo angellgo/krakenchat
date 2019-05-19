@@ -11,16 +11,17 @@
               <h5 class="white-text">Servicios</h5>
               <ul>
                 <li><a class="white-text" href="{{route('user.registrer')}}">Registarse</a></li>
-                <li><a class="white-text" href="{{route('user.login')}}">Iniciar Sesión</a></li>
+                <li><a class="white-text" href="{{route('user.loginview')}}">Iniciar Sesión</a></li>
       
               </ul>
             </div>
             <div class="col l3 s12">
               <h5 class="white-text">Proyecto</h5>
               <ul>
-                <li><a class="white-text" href="#!">Acerca de KrakenChat</a></li>
+                <li><a class="white-text" href="#">Acerca de KrakenChat</a></li>
                 <li><a class="white-text" href="#!">Nosotros</a></li>
                 <li><a class="white-text" href="#!">Contacto</a></li>
+                <li> <a class="white-text" href="https://github.com/angellgo/krakenchat"> GitHub </a></li>
               </ul>
             </div>
           </div>

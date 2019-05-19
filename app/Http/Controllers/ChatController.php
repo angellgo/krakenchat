@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Chat;
+use Illuminate\Support\Facades\Auth;
+use TheSeer\Tokenizer\Exception;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -26,9 +30,12 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       dd($request -> mensaje);
+
+       return $mensaje;
+       
     }
 
     /**

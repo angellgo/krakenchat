@@ -30,7 +30,9 @@
                     <br>
                     <span class="card-title"><b>Ingresa usuario y contraseña </b> </span>
                     <div class="row">
-
+                            @if (session()->has('flash'))
+                            <h5 class="header col s12 light"> {{session('flash')}}</h5>
+                        @endif
                         
                         {{-- <form class="col s12" method="POST" action="{{route('user.login')}}" id="inicarsesion"> --}}
                         {!!Form::open(['id'=>'inicarsesion','route'=>'user.login','class'=>'col s12'])!!}
@@ -52,8 +54,8 @@
                             <div class="row">
 
                                 <div class="input-field col s12">
-                                    {{-- <a class="waves-effect waves-light btn-large  col s12 ">Ingresar</a> --}}
-                                    <button type="submit" >Iniciar Sesion</button>
+                                    {{-- <a class="waves-effect waves-light btn-large  col s12 " onclick="iniciar()">Ingresar</a> --}}
+                                    <button type="submit" class="waves-effect waves-light btn-large  col s12">Iniciar Sesion</button>
                                 </div>
                             </div>
                             {{-- {{ csrf_field() }}
