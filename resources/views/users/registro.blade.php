@@ -114,7 +114,7 @@
         let genero = $("#genero").val();
         console.log(genero);
         if (password == pass_confirm){
-            if(nombre == "" || apellido == "" || genero == 0){
+            if(nombre == "" || apellido == "" || genero == 0 || password == "" || pass_confirm == ""){
                 Swal.fire("Error","Verifique que no haya campos vacios","error");
             }else{
                 $.ajax({
@@ -131,7 +131,7 @@
                         Swal.fire('Bien',"El usuario se registro de manera correcta","success");
                         setTimeout(function(){  window.location.href = "{{route('user.loginview')}}";},3000);
                       
-                    }else if (data.msg == "error-user"){
+                    }else if (data.msg == "existe"){
                         Swal.fire('Alerta',"Ese nombre de usuario ya existe","error");
                     }else{
                         Swal.fire('Ups',"Algo Salio mal","error"); 
@@ -145,6 +145,8 @@
             
         }else{
             Swal.fire("Alerta","Las contraseñas no coinciden","error");
+            $("#pass").val("");
+            $("#pass_confirm").val("");
         }
     }
 </script>

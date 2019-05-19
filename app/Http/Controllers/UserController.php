@@ -49,10 +49,7 @@ class UserController extends Controller
         }else{
             return back()->withErrors(['username' => 'El usuario no esta registrado o es incorrecto']);
         }
-        
-
- 
-
+    
         // if(is_object($usuario)){
         //     if(Hash::check($request->password, $usuario -> password)){
 
@@ -73,6 +70,12 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $verificar = User::where('username','=',$request -> username)->get()->first();
+        if(is_object($verificar)){
+            $verificar -> msg = "existe";
+            return $verificar;
+        }
+        
         DB::beginTransaction();
         try{
             $usuario = new User();

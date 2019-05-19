@@ -26,5 +26,7 @@ Route::post('/usuario/crear','UserController@create')->name('usuario.create');
 Route::post('/login','UserController@login')->name('user.login');
 Route::get('/chat', 'ChatController@index')->name('chat.index');
 
+//Chats
+Route::get('/nuevo/chat','ChatController@create')->name('chat.new');
 //Cerrar Sesion
 Route::post('/logout','UserController@logout')->name('logout');

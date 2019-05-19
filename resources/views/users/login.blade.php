@@ -25,7 +25,9 @@
                     <br>
                     <span class="card-title"><b>Ingresa usuario y contraseña </b> </span>
                     <div class="row">
-
+                            @if (session()->has('flash'))
+                            <h5 class="header col s12 light"> {{session('flash')}}</h5>
+                        @endif
                         
                         {{-- <form class="col s12" method="POST" action="{{route('user.login')}}" id="inicarsesion"> --}}
                         {!!Form::open(['id'=>'inicarsesion','route'=>'user.login','class'=>'col s12'])!!}
