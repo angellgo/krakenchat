@@ -12,11 +12,16 @@ class Mensaje extends Model
         'hora',
         'recibido',
         'leido',
-        'chat_id'
+        'chat_id',
+        'chat_remitente'
     ];
 
     public function chats()
     {
         return $this -> belongsTo('App\Chat','chat_id');
+    }
+    public function users()
+    {
+        return $this -> belongsTo('App\User','chat_remitente');
     }
 }

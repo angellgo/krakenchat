@@ -25,6 +25,8 @@ Route::get('/usuario/registrar','UserController@index')->name('user.registrer') 
 Route::post('/usuario/crear','UserController@create')->name('usuario.create');
 Route::post('/login','UserController@login')->name('user.login');
 Route::get('/chat', 'ChatController@index')->name('chat.index');
+//abrir conversación #
+Route::get('/chat/{idchat}', 'ChatController@CargarConversacion')->name('chat.CargarConversacion');
 
 //Chats
 Route::get('/nuevo/chat','ChatController@create')->name('chat.new');

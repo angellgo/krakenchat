@@ -56,6 +56,7 @@ class Messages extends Migration
             $table->tinyInteger('recibido') -> nullable();
             $table->tinyInteger('leido') -> nullable();
             $table->unsignedInteger('chat_id');
+            $table->unsignedInteger('chat_remitente');
             
             $table->timestamps();
 
@@ -64,6 +65,12 @@ class Messages extends Migration
                 ->on('chats')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            
+            $table->foreign('chat_remitente')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');    
         });
     
     }

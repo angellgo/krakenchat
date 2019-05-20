@@ -9,6 +9,7 @@ use TheSeer\Tokenizer\Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Auth\User;
+use App\Mensaje;
 
 class ChatController extends Controller
 {
@@ -27,7 +28,20 @@ class ChatController extends Controller
         $idUsuario=Auth()-> user();
         $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
         ->orderBy('id','DESC')->get();
+
         return view('chats.chat2',compact('contactos'));
+    }
+
+
+    public function CargarConversacion($idchat)
+    {
+        $idUsuario=Auth()-> user();
+        $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
+        ->orderBy('id','DESC')->get();
+        //dd($contactos);
+        $conversacion = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
+        
+        return view('chats.mensajes',compact('contactos'),compact('conversacion'));
     }
 
     /**

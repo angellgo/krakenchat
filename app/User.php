@@ -53,4 +53,9 @@ class User extends Authenticatable
         return $this -> hasOne('App\Chat');
         
     }
+    public function mensajes()
+    {
+        return $this -> hasOne('App\Mensaje');
+        
+    }
 }

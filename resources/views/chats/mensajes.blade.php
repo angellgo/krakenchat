@@ -1,4 +1,4 @@
-@extends('layouts.chat')   
+@extends('layouts.chat')     
 
 @section('contenido')
      <!--Navbar-->
@@ -74,10 +74,31 @@
                         <!--fin de primer columna-->
                         <div class="col m8">
                             <div class="card-panel grey lighten-4 z-depth-0 chat">
-                       
+                           
+                               
+                                @foreach ($conversacion as $item)
+                                <div class="col m12">
+                                    <div class="me nanum-gothic">
+                                    {{$item -> texto}}
+                                    </div>
+                                </div>
+                               @endforeach
+                               
     
                             </div>
-                            <br><br><br><br>
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s11">
+                                        <textarea id="mensaje" class="materialize-textarea"></textarea>
+                                        <label for="mensaje">Escribe un mensaje aquí</label>
+                                    </div>
+                                    
+                                    <a class="waves-effect waves-teal white btn-large col s1 z-depth-0"><i class="material-icons Medium center-align Large " style="color:#4db6ac">near_me</i></a>
+                                        
+                                   
+    
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
