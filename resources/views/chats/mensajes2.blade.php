@@ -79,9 +79,7 @@
                                
                                 @foreach ($conversacion as $item)
                                 <div class="col m12">
-                                    @php
-                                       $idchat=$item -> chat_id;
-                                    @endphp
+                                  
 
                                     @if (($item -> chat_remitente == Auth() -> user() -> id))
                                     <div class="me nanum-gothic">
@@ -92,32 +90,25 @@
                                             {{$item -> texto}}
                                     </div>
                                     @endif
-                                    @if (($item -> chat_remitente != Auth() -> user() -> id))
-                                    @php
-                                        $destinatariousuario=$item -> chat_remitente;
-                                    @endphp    
-
-
-                                    @endif
-
+                                  
                                 </div>
                                @endforeach
                                <div class="col m12 nanum-gothic text-black" id='response'></div>
     
                             </div>
-                            <form class="col s12" >
-                                    <input type="hidden" name="iddestinatario" value="<?php echo $destinatariousuario ?>">
-                                    <input type="hidden" name="idchat" value="<?php echo $idchat ?>">
+                            <div class="col s12">
+                            <input type="hidden" name="iddestinatario" id="iddestinatario" value="{{$destinatario}}">
+                                    <input type="hidden" name="idchat" id="idchat" value="{{$chatid}}">
                                 <div class="row">
                                     <div class="input-field col s11">
                                         <textarea id="mensaje" class="materialize-textarea" name="mensaje" ></textarea>
                                         <label for="mensaje">Escribe un mensaje aquí</label>
                                     </div>
                                     
-                                    <button class="waves-effect waves-teal white btn-large col s1 z-depth-0" type="submit" onclick="escribirMensaje()"><i class="material-icons Medium center-align Large " style="color:#4db6ac">near_me</i></button>
+                                    <button class="waves-effect waves-teal white btn-large col s1 z-depth-0" onclick="escribirMensaje()"><i class="material-icons Medium center-align Large " style="color:#4db6ac">near_me</i></button>
                                 
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +121,7 @@
               <div class="row"><br><br>
                 <div class="input-field col s12">
                  <input type="text" id="contacto" class="validate" autofocus> 
-                  <label for="contacto">Nombre de Usuario</label>
+                  <label for="c ontacto">Nombre de Usuario</label>
                 </div>
               </div> 
              
@@ -165,9 +156,11 @@
             async:false,
             data:{iddestinatario,idchat,mensaje},
             success:function(data){
-                if(data.msg == "success"){
-                    Swal.fire('Bien',"El usuario se registro de manera correcta","success");
-                  
+                if(data.msg == "msjsend"){
+                    $('#response').html("El mensaje fue enviado");
+                    $("#response").fadeOut("slow");
+                    $("#mensaje").val("");
+                    
                 }else{
                    
                     $('#response').html("Lo sentimos su mensaje no pudo ser enviado"); 

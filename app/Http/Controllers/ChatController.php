@@ -37,17 +37,18 @@ class ChatController extends Controller
     {
         $idUsuario=Auth()-> user();
         $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
-        ->orderBy('id','DESC')->get();
-        //dd($contactos);
+        ->orderBy('fecha','DESC')->get();
+        $chatmensaje = Chat::find($idchat);
+        
+        $destinatario = $chatmensaje -> destinatario;
+        $chatid = $chatmensaje -> id;
+        // dd($desinatario);
         $conversacion = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
     
-        return view('chats.mensajes2',compact('contactos'),compact('conversacion'));
+        return view('chats.mensajes2',compact('contactos','conversacion','destinatario','chatid'));
     }
 
-    public function escribir(Request $request)
-    {
-        dd($request -> mensaje);
-    }
+   
     
     /**
      * Show the form for creating a new resource.

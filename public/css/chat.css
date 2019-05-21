@@ -10,7 +10,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	 /* Solo lo puse para que se vea el cuadro*/
     }
  .chat{
-     min-height: 650px;
+     min-height: 400px;
      width: 100%;
      max-height:650px;
      overflow: auto;
