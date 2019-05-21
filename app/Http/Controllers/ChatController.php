@@ -40,10 +40,15 @@ class ChatController extends Controller
         ->orderBy('id','DESC')->get();
         //dd($contactos);
         $conversacion = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
-        
-        return view('chats.mensajes',compact('contactos'),compact('conversacion'));
+    
+        return view('chats.mensajes2',compact('contactos'),compact('conversacion'));
     }
 
+    public function escribir(Request $request)
+    {
+        dd($request -> mensaje);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -101,7 +106,8 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mensaje -> msg = "existe";
+        return $mensaje;
     }
 
     /**

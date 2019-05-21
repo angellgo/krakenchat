@@ -26,7 +26,6 @@
             <div class="card z-depth-3">
                 <div class="card-content black-text ">
                     <div class="row">
-                         
                                 <div class="col m6 s12">
                                    <br>
                                     <span class="card-title"><b>Crear tu cuenta de KrakenChat</b> </span>

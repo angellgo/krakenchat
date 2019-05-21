@@ -25,10 +25,13 @@ Route::get('/usuario/registrar','UserController@index')->name('user.registrer') 
 Route::post('/usuario/crear','UserController@create')->name('usuario.create');
 Route::post('/login','UserController@login')->name('user.login');
 Route::get('/chat', 'ChatController@index')->name('chat.index');
-//abrir conversación #
-Route::get('/chat/{idchat}', 'ChatController@CargarConversacion')->name('chat.CargarConversacion');
-
-//Chats
+//Chats agregar contactos
 Route::get('/nuevo/chat','ChatController@create')->name('chat.new');
+//abrir conversación 
+Route::get('/chat/nochat/{idchat}', 'ChatController@CargarConversacion')->name('chat.CargarConversacion');
+//enviar mensaje de una conversacion
+Route::post('/chat/escribir','ChatController@escribir')->name('mensaje.escribir');
+
+
 //Cerrar Sesion
 Route::post('/logout','UserController@logout')->name('logout');

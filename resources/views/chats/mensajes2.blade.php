@@ -105,7 +105,7 @@
                                <div class="col m12 nanum-gothic text-black" id='response'></div>
     
                             </div>
-                            <form class="col s12" id='enviarMensaje'>
+                            <form class="col s12" >
                                     <input type="hidden" name="iddestinatario" value="<?php echo $destinatariousuario ?>">
                                     <input type="hidden" name="idchat" value="<?php echo $idchat ?>">
                                 <div class="row">
@@ -114,7 +114,7 @@
                                         <label for="mensaje">Escribe un mensaje aquí</label>
                                     </div>
                                     
-                                    <button class="waves-effect waves-teal white btn-large col s1 z-depth-0" type="submit"><i class="material-icons Medium center-align Large " style="color:#4db6ac">near_me</i></button>
+                                    <button class="waves-effect waves-teal white btn-large col s1 z-depth-0" type="submit" onclick="escribirMensaje()"><i class="material-icons Medium center-align Large " style="color:#4db6ac">near_me</i></button>
                                 
                                 </div>
                             </form>
@@ -143,48 +143,46 @@
 
 @section('javascript')
 <script>
-        $(document).ready(function(){
-            $('#enviarMensaje').submit(function(){
-                // show that something is loading
-                
-                $('#response').html("Enviando Mensaje...");
-                    /*
-                    * 'post_receiver.php' - where you will pass the form data
-                    * $(this).serialize() - to easily read form data
-                    * function(data){... - data contains the response from post_receiver.php
-                    */
-                $.ajax({
-                    type: 'POST',
-                    url: '{{asset(''."/chat/escribirmensaje")}}', 
-                    data: $(this).serialize()
-                })
-                .done(function(data){
-                    // show the response
-                    $('#response').html(data);
-                    $("#response").fadeOut(3000);
-                   //borrar el la text box
-                   $("textarea").val("");
-                        
-                })
-                .fail(function() {
-                    // just in case posting your form failed
-                    $('#responde').remove();
-                    $('#response').html("Lo sentimos su mensaje no pudo ser enviado");
-                    
-                    
-                        
-                });
+    function escribirMensaje(){
+        let route = "{{route('mensaje.escribir')}}";
+        let iddestinatario = $("#iddestinatario").val();
+        let idchat = $("#idchat").val();
+        let mensaje = $("#mensaje").val();
+        console.log(iddestinatario+' '+ idchat+' '+mensaje);
+    
+        if(iddestinatario == "" || idchat == "" || mensaje == 0){
+           
+            $('#response').html("Verifique que no haya campos vacios");
             
-                // to prevent refreshing the whole page page
-                return false;
-            
-            });
+        }else{
+            $.ajax({
+            url:route,
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'POST',
+            datatype:'JSON',
+            async:false,
+            data:{iddestinatario,idchat,mensaje},
+            success:function(data){
+                if(data.msg == "success"){
+                    Swal.fire('Bien',"El usuario se registro de manera correcta","success");
+                  
+                }else{
+                   
+                    $('#response').html("Lo sentimos su mensaje no pudo ser enviado"); 
+                }
+            },
+            error:function(data){
+                $('#response').html("Ups Algo Salio mal error");
+               
+            }
         });
-            //cargar lista de chat en segundo plano
-            
-            
-            
-            </script>    
+        }
+        
+        
+    }
+</script>  
 
 
 @endsection

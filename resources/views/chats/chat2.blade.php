@@ -50,7 +50,7 @@
                                 @foreach ($contactos as $item)
                                 @if ($item -> id_remitente == Auth() -> user() -> id)
                                 <li class="collection-item avatar" style="border-bottom: none">
-                                    <a href="{{asset('/chat/'.$item -> id)}}" style="color:#424242">
+                                    <a href="{{asset('/chat/nochat/'.$item -> id)}}" style="color:#424242">
                                         <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
                                         <span class="title" style="font-weight: bolder">{{$item -> destinatario}}</span>
                                         <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
@@ -59,7 +59,7 @@
                                 </li> 
                                 @else
                                 <li class="collection-item avatar" style="border-bottom: none">
-                                    <a href="{{asset('/chat/'.$item -> id)}}" style="color:#424242">
+                                    <a href="{{asset('/chat/nochat/'.$item -> id)}}" style="color:#424242">
                                         <img src="{{asset('images/ronald rievest.jpg')}}" alt="" class="circle">
                                         <span class="title" style="font-weight: bolder">{{$item -> users -> username}}</span>
                                         <p class="truncate">First Line Second Linecasdasdasssssssssssssshghhhjjkhkjhgjg
