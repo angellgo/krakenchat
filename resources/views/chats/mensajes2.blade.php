@@ -73,26 +73,10 @@
                         </div>
                         <!--fin de primer columna-->
                         <div class="col m8">
-                               
-                            <div class="card-panel grey lighten-4 z-depth-0 chat">
+                               <h5 class="nanum-gothic"> {{$destinatario}}</h5>   
+                            <div class="card-panel grey lighten-4 z-depth-0 chat" >
                            
-                               
-                                @foreach ($conversacion as $item)
-                                <div class="col m12">
-                                  
-
-                                    @if (($item -> chat_remitente == Auth() -> user() -> id))
-                                    <div class="me nanum-gothic">
-                                            {{$item -> texto}}
-                                    </div>
-                                    @else
-                                    <div class="friend nanum-gothic">
-                                            {{$item -> texto}}
-                                    </div>
-                                    @endif
-                                  
-                                </div>
-                               @endforeach
+                               <div class="col m12" id="conversacion"></div>
                                <div class="col m12 nanum-gothic text-black" id='response'></div>
     
                             </div>
@@ -101,7 +85,7 @@
                                     <input type="hidden" name="idchat" id="idchat" value="{{$chatid}}">
                                 <div class="row">
                                     <div class="input-field col s11">
-                                        <textarea id="mensaje" class="materialize-textarea" name="mensaje" ></textarea>
+                                        <textarea id="mensaje" class="materialize-textarea" name="mensaje" onkeypress="if (event.keyCode == 13) escribirMensaje()"></textarea>
                                         <label for="mensaje">Escribe un mensaje aquí</label>
                                     </div>
                                     
@@ -134,6 +118,10 @@
 
 @section('javascript')
 <script>
+    //con esta funcion llamamos a la función getTimeAJAX cada segundo para actualizar el div que mostrará la hora
+    setInterval(getTimeAJAX,1000);
+
+
     function escribirMensaje(){
         let route = "{{route('mensaje.escribir')}}";
         let iddestinatario = $("#iddestinatario").val();
@@ -164,16 +152,35 @@
                 }else{
                    
                     $('#response').html("Lo sentimos su mensaje no pudo ser enviado"); 
+                    $("#response").fadeOut("slow");
+                    
                 }
+
+               
             },
             error:function(data){
                 $('#response').html("Ups Algo Salio mal error");
+                $("#response").fadeOut("slow");
                
             }
         });
         }
         
         
+    }
+    function getTimeAJAX() {
+
+    //GUARDAMOS EN UNA VARIABLE EL RESULTADO DE LA CONSULTA AJAX    
+
+    var time = $.ajax({
+
+        url: '{{asset('').'chat/mensajes/'.$chatid}}', //indicamos la ruta donde se genera la hora
+            dataType: 'json',//indicamos que es de tipo texto plano
+            async: false     //ponemos el parámetro asyn a falso
+    }).responseText;
+
+    //actualizamos el div que nos mostrará la hora actual
+    document.getElementById("conversacion").innerHTML =time;
     }
 </script>  
 

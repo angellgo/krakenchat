@@ -31,6 +31,9 @@ Route::get('/nuevo/chat','ChatController@create')->name('chat.new');
 Route::get('/chat/nochat/{idchat}', 'ChatController@CargarConversacion')->name('chat.CargarConversacion');
 //enviar mensaje de una conversacion
 Route::post('/chat/escribir','MensajesController@escribir')->name('mensaje.escribir');
+//caragar mensajes
+Route::get('/chat/mensajes/{idchat}', 'ChatController@Conversacion')->name('chat.ConversacionMensajes');
+
 
 
 //Cerrar Sesion

@@ -48,6 +48,13 @@ class ChatController extends Controller
         return view('chats.mensajes2',compact('contactos','conversacion','destinatario','chatid'));
     }
 
+    public function Conversacion($idchat)
+    {
+    
+        $mensajes = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
+       
+        return view('chats.conversacion',compact('mensajes'));
+    }
    
     
     /**
