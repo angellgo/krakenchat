@@ -34,7 +34,8 @@
             <div class="row" style="margin-top: 35px;">
                 <div class="card z-depth-3 col m12 s12">
                     <div class="card-content">
-    
+                   
+                        
                         <!--primer columna-->
                         <div class="col m4 s12">
                             <div class="row left-align">
@@ -78,17 +79,24 @@
                            
                                
                                 @foreach ($conversacion as $item)
-                                <div class="col m12">
+                                <div class="col m12" >
                                   
 
                                     @if (($item -> chat_remitente == Auth() -> user() -> id))
-                                    <div class="me nanum-gothic">
+                                    <div class="me nanum-gothic mensaje" id="{{$item -> id}}">
                                             {{$item -> texto}}
+                                                           
+                         
                                     </div>
                                     @else
-                                    <div class="friend nanum-gothic">
+                                    <div class="friend nanum-gothic mensaje" id="{{$item -> id}}">
                                             {{$item -> texto}}
+                                            
+                                        
+                                            {{-- <button onclick="decifrar()" > Decifrar </button> --}}
+                                           
                                     </div>
+                                   
                                     @endif
                                   
                                 </div>
@@ -113,6 +121,8 @@
                     </div>
                 </div>
             </div>
+           
+       
     
         </div>
         <div id="modal1" class="modal" style="max-width:750px">
@@ -161,6 +171,7 @@
                     $("#response").fadeOut("slow");
                     $("#mensaje").val("");
                     
+                    
                 }else{
                    
                     $('#response').html("Lo sentimos su mensaje no pudo ser enviado"); 
@@ -175,8 +186,30 @@
         
         
     }
-</script>  
 
+    $('.mensaje').on('click',function(){
+        console.log("Pulso");
+
+        let id = $(this).attr("id");
+        let route = "{{route('mensaje.decrypt')}}";
+        $.ajax({
+            url:route,
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'GET',
+            datatype:'JSON',
+            async:false,
+            data:{id:id},
+            success:function(data){
+               console.log(data);
+                $("#response").html(data);
+            },
+            error:function(data){
+            }
+        });
+    });
+</script>  
 
 @endsection
 
