@@ -74,12 +74,13 @@
                         <!--fin de primer columna-->
                         <div class="col m8">
                                <h5 class="nanum-gothic"> {{$destinatario}}</h5>   
-                            <div class="card-panel grey lighten-4 z-depth-0 chat" >
+                            <div class="card-panel grey lighten-4 z-depth-0 chat" id="conversacion">
                            
-                               <div class="col m12" id="conversacion"></div>
-                               <div class="col m12 nanum-gothic text-black" id='response'></div>
+                             
+                                    <div class="col m12 nanum-gothic text-black" id='response'></div>
     
                             </div>
+                            
                             <div class="col s12">
                             <input type="hidden" name="iddestinatario" id="iddestinatario" value="{{$destinatario}}">
                                     <input type="hidden" name="idchat" id="idchat" value="{{$chatid}}">

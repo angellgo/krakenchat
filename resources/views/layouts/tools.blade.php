@@ -1,4 +1,4 @@
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('css/materialize.css') }}">
