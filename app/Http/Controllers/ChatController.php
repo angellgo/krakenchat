@@ -51,9 +51,9 @@ class ChatController extends Controller
     public function Conversacion($idchat)
     {
     
-        $mensajes = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
+        $conversacion = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
        
-        return view('chats.conversacion',compact('mensajes'));
+        return view('chats.conversacion',compact('conversacion'));
     }
    
     

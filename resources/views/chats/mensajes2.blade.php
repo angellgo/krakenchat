@@ -34,7 +34,8 @@
             <div class="row" style="margin-top: 35px;">
                 <div class="card z-depth-3 col m12 s12">
                     <div class="card-content">
-    
+                   
+                        
                         <!--primer columna-->
                         <div class="col m4 s12">
                             <div class="row left-align">
@@ -77,7 +78,7 @@
                             <div class="card-panel grey lighten-4 z-depth-0 chat" id="conversacion">
                            
                              
-                                    <div class="col m12 nanum-gothic text-black" id='response'></div>
+                                    <div class="col m12 nanum-gothic text-black" id='response'>  </div>
     
                             </div>
                             
@@ -98,6 +99,8 @@
                     </div>
                 </div>
             </div>
+           
+       
     
         </div>
         <div id="modal1" class="modal" style="max-width:750px">
@@ -119,9 +122,68 @@
 
 @section('javascript')
 <script>
-    //con esta funcion llamamos a la función getTimeAJAX cada segundo para actualizar el div que mostrará la hora
-    setInterval(getTimeAJAX,1000);
 
+
+    function decifrar(id){
+        console.log("Pulso");
+        // alert("A");
+       
+        // let id = $(this).attr("id");
+        // console.log(id);
+        let route = "{{route('mensaje.decrypt')}}";
+        $.ajax({
+            url:route,
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'GET',
+            datatype:'JSON',
+            async:false,
+            data:{id:id},
+            success:function(data){
+               console.log(data);
+            //    $("#"+id).remove();
+               $("#"+id).text(data);
+               // $("#"+id).val(data);
+            },
+            error:function(data){
+            }
+        });
+    }
+
+    //  $('.mensajedecrypt').on('click',function(){
+    //     StopAjax=true;
+    //     console.log("Pulso");
+    //     // alert("A");
+    //     let id = $(this).attr("id");
+    //     let route = "{{route('mensaje.decrypt')}}";
+    //     $.ajax({
+    //         url:route,
+    //         headers:{
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         type:'GET',
+    //         datatype:'JSON',
+    //         async:false,
+    //         data:{id:id},
+    //         success:function(data){
+    //            console.log(data);
+    //             $("#response").html(data);
+    //         },
+    //         error:function(data){
+    //         }
+    //     });
+    // });
+    
+   
+    var StopAjax=false;
+    //con esta funcion llamamos a la función getTimeAJAX cada segundo para actualizar el div que mostrará la hora
+    if(!StopAjax){
+        setInterval(getTimeAJAX,5000);
+    }
+    
+    
+ 
 
     function escribirMensaje(){
         let route = "{{route('mensaje.escribir')}}";
@@ -150,6 +212,7 @@
                     $("#response").fadeOut("slow");
                     $("#mensaje").val("");
                     
+                    
                 }else{
                    
                     $('#response').html("Lo sentimos su mensaje no pudo ser enviado"); 
@@ -172,7 +235,7 @@
     function getTimeAJAX() {
 
     //GUARDAMOS EN UNA VARIABLE EL RESULTADO DE LA CONSULTA AJAX    
-
+    
     var time = $.ajax({
 
         url: '{{asset('').'chat/mensajes/'.$chatid}}', //indicamos la ruta donde se genera la hora
@@ -183,8 +246,9 @@
     //actualizamos el div que nos mostrará la hora actual
     document.getElementById("conversacion").innerHTML =time;
     }
-</script>  
 
+   
+</script>  
 
 @endsection
 

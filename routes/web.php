@@ -35,6 +35,8 @@ Route::post('/chat/escribir','MensajesController@escribir')->name('mensaje.escri
 Route::get('/chat/mensajes/{idchat}', 'ChatController@Conversacion')->name('chat.ConversacionMensajes');
 
 
+//Decifrar
+Route::get('/mensaje/decifrar','MensajesController@decifrar')->name('mensaje.decrypt');
 
 //Cerrar Sesion
 Route::post('/logout','UserController@logout')->name('logout');
