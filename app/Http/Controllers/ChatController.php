@@ -39,8 +39,13 @@ class ChatController extends Controller
         $contactos = Chat::where('id_remitente','=',$idUsuario -> id)->orwhere('destinatario','=',$idUsuario -> username)
         ->orderBy('fecha','DESC')->get();
         $chatmensaje = Chat::find($idchat);
-        
+        // dd($chatmensaje);
+
         $destinatario = $chatmensaje -> destinatario;
+
+        if ($destinatario == $idUsuario -> username){
+            $destinatario = $chatmensaje -> users -> username;
+        }
         $chatid = $chatmensaje -> id;
         // dd($desinatario);
         $conversacion = Mensaje::where('chat_id','=',$idchat)->orderBy('id','ASC')->get();
