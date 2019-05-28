@@ -5,7 +5,7 @@
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content ">
  
-            <li><a href="#!">Perfil</a></li>
+            <li><a href="{{route('user.profile')}}">Perfil</a></li>
             <li><a href="#!">Configuración</a></li>
             <li class="divider"></li>
            

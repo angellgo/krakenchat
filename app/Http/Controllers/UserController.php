@@ -33,6 +33,13 @@ class UserController extends Controller
         return view('users.login');
     }
 
+    public function profileview()
+    {
+        $user = Auth() -> user();
+
+        return view('users.profile',compact('user'));
+    }
+
     
 
     public function login(Request $request)
