@@ -119,8 +119,7 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        $mensaje -> msg = "existe";
-        return $mensaje;
+        
     }
 
     /**
